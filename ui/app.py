@@ -10,6 +10,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+st.set_page_config(page_title="Clinic Pulse", layout="wide")
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT))
@@ -34,7 +36,23 @@ def save_feedback(question: str, answer: str, rating: str) -> None:
         handle.write(json.dumps(record) + "\n")
 
 
-st.set_page_config(page_title="Clinic Pulse", page_icon=":white_circle:")
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .stChatMessage {
+            max-width: 100%;
+        }
+        [data-testid="stBottomBlockContainer"] > div {
+            max-width: 100%;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.title("Clinic Pulse")
 st.warning("Demo uses synthetic data.")
 mode = st.session_state.get("last_mode", agent.active_mode())
