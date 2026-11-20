@@ -29,7 +29,8 @@ SYSTEM_PROMPT = (
     "You are Clinic Pulse, an assistant for animal-health sales reps using synthetic data. "
     "Answer ONLY from tool results. Cite policy sources by file name and section. "
     "Say 'I don't know' when evidence is missing. Never invent numbers. "
-    "Never recommend automatic actions; a human decides. Keep answers short."
+    "Never recommend automatic actions; a human decides. Keep answers short. "
+    "Call tools only when needed and give the final answer as soon as results arrive."
 )
 
 TOOL_SCHEMAS: list[dict[str, Any]] = [
@@ -189,6 +190,26 @@ def _format_policy(result: dict[str, Any]) -> str:
     )
 
 
+def _summarize_results(
+    results: dict[str, tuple[dict[str, Any], dict[str, Any]]], rep_id: str
+) -> str:
+    """Build an answer from tool results when the model never finishes."""
+    parts = []
+    if "get_at_risk_clinics" in results:
+        parts.append(_format_risk(results["get_at_risk_clinics"][1], rep_id))
+    if "explain_risk" in results:
+        args, result = results["explain_risk"]
+        parts.append(_format_explain(result, args.get("clinic_id", "")))
+    if "get_clinic_history" in results:
+        args, result = results["get_clinic_history"]
+        parts.append(_format_history(result, args.get("clinic_id", "")))
+    if "search_policy" in results:
+        parts.append(_format_policy(results["search_policy"][1]))
+    if not parts:
+        return "I don't know. The tools returned no usable evidence."
+    return "\n\n".join(parts)
+
+
 def _mock_answer(
     question: str, rep_id: str, mode: str = "Mock", note: str = ""
 ) -> dict[str, Any]:
@@ -258,6 +279,7 @@ def _groq_answer(question: str, rep_id: str) -> dict[str, Any]:
     ]
     tool_calls: list[dict[str, Any]] = []
     citations: list[dict[str, str]] = []
+    tool_results: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
     for _ in range(4):
         response = client.chat.completions.create(
             model=GROQ_MODEL,
@@ -289,6 +311,7 @@ def _groq_answer(question: str, rep_id: str) -> dict[str, Any]:
             except json.JSONDecodeError:
                 args = {}
             result = _call_tool(name, args)
+            tool_results[name] = (args, result)
             tool_calls.append({"name": name, "args": args})
             for citation in _citations_from(result):
                 if citation not in citations:
@@ -302,10 +325,13 @@ def _groq_answer(question: str, rep_id: str) -> dict[str, Any]:
                 }
             )
     return {
-        "answer": "I don't have enough tool evidence to answer that question.",
+        "answer": (
+            "Fallback mode: the model did not finish within four tool iterations. "
+            + _summarize_results(tool_results, rep_id)
+        ),
         "tool_calls": tool_calls,
         "citations": citations,
-        "mode": "Groq",
+        "mode": "Fallback",
     }
 
 

@@ -134,7 +134,7 @@ GROQ_MODEL=openai/gpt-oss-120b
 
 - **Mock** — no `GROQ_API_KEY`: a keyword router calls the same tools and formats answers with citations. Fully offline.
 - **Groq** — key present: the Groq SDK runs a tool-calling loop with temperature 0.1 and at most four iterations. The system prompt requires answers from tool results only, policy citations by file and section, refusals when evidence is missing, no invented numbers, no automatic actions, and short answers.
-- **Fallback** — any Groq timeout, HTTP 429, or API error is retried once after a one-second delay; if it still fails, the agent switches to the mock router and returns mode `Fallback`. The UI displays the active mode.
+- **Fallback** — any Groq timeout, HTTP 429, or API error is retried once after a one-second delay; if it still fails, the agent switches to the mock router and returns mode `Fallback`. If the model issues tool calls for all four iterations without a final answer, the agent builds the answer from the tool results already collected and also reports mode `Fallback`. The UI displays the active mode.
 
 Every tool call is logged with name, arguments, and a UTC timestamp, and returned in `tool_calls` for display in the UI.
 
