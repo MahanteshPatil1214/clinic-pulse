@@ -7,7 +7,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-import pandas as pd
+from html import escape
+
 import streamlit as st
 
 st.set_page_config(page_title="Clinic Pulse", layout="wide")
@@ -36,9 +37,43 @@ def save_feedback(question: str, answer: str, rating: str) -> None:
         handle.write(json.dumps(record) + "\n")
 
 
+def risk_pill(score: float) -> str:
+    """Return a colour-coded score pill."""
+    if score >= 0.8:
+        background, colour = "#e6f7f4", "#0f6f66"
+    elif score >= 0.5:
+        background, colour = "#fff4d6", "#8a5b00"
+    else:
+        background, colour = "#ffe8e6", "#a3261d"
+    return (
+        f'<span class="cp-pill" style="background:{background};color:{colour}">'
+        f"{score:.3f}</span>"
+    )
+
+
+def render_risk_table(clinics: list[dict]) -> str:
+    """Render the ranked clinic table as escaped HTML."""
+    rows = []
+    for clinic in clinics:
+        cells = [
+            f"<td>{escape(str(clinic['clinic_id']))}</td>",
+            f"<td>{escape(str(clinic['name']))}</td>",
+            f"<td>{escape(str(clinic['region']))}</td>",
+            f"<td>{risk_pill(float(clinic['risk_score']))}</td>",
+            f"<td>{escape('; '.join(clinic['reasons']))}</td>",
+        ]
+        rows.append("<tr>" + "".join(cells) + "</tr>")
+    return (
+        '<table class="cp-table"><thead><tr>'
+        "<th>Clinic</th><th>Name</th><th>Region</th><th>Risk</th><th>Reasons</th>"
+        "</tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
+    )
+
+
 st.markdown(
     """
     <style>
+        body, .stApp { font-family:'Aptos','Segoe UI',sans-serif; }
         .block-container {
             padding-left: 1rem;
             padding-right: 1rem;
@@ -49,14 +84,29 @@ st.markdown(
         [data-testid="stBottomBlockContainer"] > div {
             max-width: 100%;
         }
+        .cp-status { display:flex; gap:.75rem; align-items:center; margin-bottom:1rem; }
+        .cp-banner { background:#e6f7f4; color:#0f4c4c; border:1px solid #c9e6e4; border-radius:.5rem; padding:.5rem .75rem; font-weight:600; }
+        .cp-mode { background:#f4fbfb; color:#0f6f66; border:1px solid #c9e6e4; border-radius:999px; padding:.4rem .75rem; font-size:.85rem; }
+        .cp-card { background:#fff; border:1px solid #c9e6e4; border-left:4px solid #0f9b8e; border-radius:.5rem; padding:.75rem; }
+        .cp-card-label { font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:#39716f; }
+        .cp-card-value { font-size:1.4rem; font-weight:700; color:#0f4c4c; }
+        .cp-table { width:100%; border-collapse:collapse; background:#fff; }
+        .cp-table th { background:#0f4c4c; color:#fff; text-align:left; padding:.5rem; }
+        .cp-table td { padding:.5rem; border-bottom:1px solid #e3efee; vertical-align:top; }
+        .cp-pill { display:inline-block; padding:.15rem .5rem; border-radius:999px; font-weight:700; font-variant-numeric:tabular-nums; }
     </style>
     """,
     unsafe_allow_html=True,
 )
 st.title("Clinic Pulse")
-st.warning("Demo uses synthetic data.")
 mode = st.session_state.get("last_mode", agent.active_mode())
-st.caption(f"Active mode: {mode}")
+st.markdown(
+    '<div class="cp-status">'
+    '<div class="cp-banner">Demo uses synthetic data.</div>'
+    f'<div class="cp-mode">Active mode: {escape(str(mode))}</div>'
+    "</div>",
+    unsafe_allow_html=True,
+)
 
 reps = tools.list_reps()
 rep_id = st.selectbox("Sales rep", options=reps, index=0)
@@ -64,13 +114,22 @@ rep_id = st.selectbox("Sales rep", options=reps, index=0)
 st.subheader("Top at-risk clinics")
 risk = tools.get_at_risk_clinics(rep_id, top_n=10)
 if risk.get("ok"):
-    table = pd.DataFrame(risk["clinics"])
-    table["reasons"] = table["reasons"].apply("; ".join)
-    st.dataframe(
-        table[["clinic_id", "name", "region", "risk_score", "reasons"]],
-        use_container_width=True,
-        hide_index=True,
-    )
+    scores = [float(clinic["risk_score"]) for clinic in risk["clinics"]]
+    labels = ["Clinics reviewed", "Highest risk score", "Average risk score"]
+    values = [
+        str(len(scores)),
+        f"{max(scores):.3f}" if scores else "-",
+        f"{sum(scores) / len(scores):.3f}" if scores else "-",
+    ]
+    for column, label, value in zip(st.columns(3), labels, values):
+        column.markdown(
+            f'<div class="cp-card">'
+            f'<div class="cp-card-label">{escape(label)}</div>'
+            f'<div class="cp-card-value">{escape(value)}</div>'
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    st.markdown(render_risk_table(risk["clinics"]), unsafe_allow_html=True)
 else:
     st.error(risk.get("error", "Could not load risk scores"))
 
