@@ -35,15 +35,18 @@ REASON_TEXT = {
     ),
     "vaccines_share_change": lambda value: (
         f"Vaccines share {'down' if value < 0 else 'up'} "
-        f"{abs(value) * 100:.0f} percentage points"
+        f"{abs(value) * 100:.0f} percentage "
+        f"{'point' if round(abs(value) * 100) == 1 else 'points'}"
     ),
     "diagnostics_share_change": lambda value: (
         f"Diagnostics share {'down' if value < 0 else 'up'} "
-        f"{abs(value) * 100:.0f} percentage points"
+        f"{abs(value) * 100:.0f} percentage "
+        f"{'point' if round(abs(value) * 100) == 1 else 'points'}"
     ),
     "nutrition_share_change": lambda value: (
         f"Nutrition share {'down' if value < 0 else 'up'} "
-        f"{abs(value) * 100:.0f} percentage points"
+        f"{abs(value) * 100:.0f} percentage "
+        f"{'point' if round(abs(value) * 100) == 1 else 'points'}"
     ),
     "size_ordinal": lambda value: (
         f"{['Small', 'Medium', 'Large'][min(max(int(value), 0), 2)]} clinic size"

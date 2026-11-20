@@ -32,7 +32,7 @@
   "C-007": [
     "Order value up 3% vs prior 3 months",
     "Clinic visits down 22% vs prior 3 months",
-    "Diagnostics share down 1 percentage points"
+    "Diagnostics share down 1 percentage point"
   ],
   "C-008": [
     "Order value down 29% vs prior 3 months",
@@ -102,7 +102,7 @@
   "C-021": [
     "Order value up 5% vs prior 3 months",
     "Clinic visits up 0% vs prior 3 months",
-    "Diagnostics share up 1 percentage points"
+    "Diagnostics share up 1 percentage point"
   ],
   "C-022": [
     "Order value down 28% vs prior 3 months",
@@ -142,12 +142,12 @@
   "C-029": [
     "Order value down 21% vs prior 3 months",
     "Nutrition share down 4 percentage points",
-    "Vaccines share down 1 percentage points"
+    "Vaccines share down 1 percentage point"
   ],
   "C-030": [
     "Order value up 2% vs prior 3 months",
     "Last order was about 3 days ago",
-    "Nutrition share down 1 percentage points"
+    "Nutrition share down 1 percentage point"
   ],
   "C-031": [
     "Order value down 17% vs prior 3 months",
@@ -181,7 +181,7 @@
   ],
   "C-037": [
     "Order value down 2% vs prior 3 months",
-    "Diagnostics share up 1 percentage points",
+    "Diagnostics share up 1 percentage point",
     "Vaccines share down 10 percentage points"
   ],
   "C-038": [
@@ -257,7 +257,7 @@
   "C-052": [
     "Order value up 1% vs prior 3 months",
     "Clinic visits up 0% vs prior 3 months",
-    "Diagnostics share up 1 percentage points"
+    "Diagnostics share up 1 percentage point"
   ],
   "C-053": [
     "Order value down 22% vs prior 3 months",
@@ -281,13 +281,13 @@
   ],
   "C-057": [
     "Order value down 5% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Order count down 6% vs prior 3 months"
   ],
   "C-058": [
     "Order value down 24% vs prior 3 months",
     "Clinic visits down 38% vs prior 3 months",
-    "Vaccines share down 1 percentage points"
+    "Vaccines share down 1 percentage point"
   ],
   "C-059": [
     "Order value down 25% vs prior 3 months",
@@ -305,7 +305,7 @@
     "Nutrition share down 2 percentage points"
   ],
   "C-062": [
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Last order was about 10 days ago",
     "Order value down 7% vs prior 3 months"
   ],
@@ -336,7 +336,7 @@
   ],
   "C-068": [
     "Order value up 1% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Clinic visits up 0% vs prior 3 months"
   ],
   "C-069": [
@@ -347,7 +347,7 @@
   "C-070": [
     "Order value down 2% vs prior 3 months",
     "Clinic visits down 18% vs prior 3 months",
-    "Diagnostics share down 1 percentage points"
+    "Diagnostics share down 1 percentage point"
   ],
   "C-071": [
     "Order value down 1% vs prior 3 months",
@@ -456,7 +456,7 @@
   ],
   "C-092": [
     "Order value up 5% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Diagnostics share up 2 percentage points"
   ],
   "C-093": [
@@ -491,7 +491,7 @@
   ],
   "C-099": [
     "Order value down 2% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Vaccines share up 8 percentage points"
   ],
   "C-100": [
@@ -541,7 +541,7 @@
   ],
   "C-109": [
     "Order value down 6% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Diagnostics share up 6 percentage points"
   ],
   "C-110": [
@@ -552,7 +552,7 @@
   "C-111": [
     "Order value up 1% vs prior 3 months",
     "Clinic visits down 12% vs prior 3 months",
-    "Nutrition share up 1 percentage points"
+    "Nutrition share up 1 percentage point"
   ],
   "C-112": [
     "Order value down 0% vs prior 3 months",
@@ -716,7 +716,7 @@
   ],
   "C-144": [
     "Order value up 1% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Clinic visits up 6% vs prior 3 months"
   ],
   "C-145": [
@@ -747,7 +747,7 @@
   "C-150": [
     "Order value up 1% vs prior 3 months",
     "Clinic visits up 7% vs prior 3 months",
-    "Diagnostics share up 1 percentage points"
+    "Diagnostics share up 1 percentage point"
   ],
   "C-151": [
     "Order value down 2% vs prior 3 months",
@@ -755,7 +755,7 @@
     "Clinic visits up 0% vs prior 3 months"
   ],
   "C-152": [
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Order value down 6% vs prior 3 months",
     "Last order was about 10 days ago"
   ],
@@ -777,12 +777,12 @@
   "C-156": [
     "Order value up 5% vs prior 3 months",
     "Diagnostics share up 7 percentage points",
-    "Vaccines share up 1 percentage points"
+    "Vaccines share up 1 percentage point"
   ],
   "C-157": [
     "Order value up 6% vs prior 3 months",
     "Diagnostics share down 0 percentage points",
-    "Nutrition share up 1 percentage points"
+    "Nutrition share up 1 percentage point"
   ],
   "C-158": [
     "Order value up 0% vs prior 3 months",
@@ -796,7 +796,7 @@
   ],
   "C-160": [
     "Order value down 3% vs prior 3 months",
-    "Diagnostics share down 1 percentage points",
+    "Diagnostics share down 1 percentage point",
     "Clinic visits up 6% vs prior 3 months"
   ],
   "C-161": [
@@ -866,7 +866,7 @@
   ],
   "C-174": [
     "Order value down 10% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Large clinic size"
   ],
   "C-175": [
@@ -897,12 +897,12 @@
   "C-180": [
     "Order value down 3% vs prior 3 months",
     "Clinic visits down 33% vs prior 3 months",
-    "Nutrition share up 1 percentage points"
+    "Nutrition share up 1 percentage point"
   ],
   "C-181": [
     "Order value down 29% vs prior 3 months",
     "Diagnostics share up 19 percentage points",
-    "Nutrition share down 1 percentage points"
+    "Nutrition share down 1 percentage point"
   ],
   "C-182": [
     "Order value up 1% vs prior 3 months",
@@ -947,7 +947,7 @@
   "C-190": [
     "Order value down 4% vs prior 3 months",
     "Clinic visits up 0% vs prior 3 months",
-    "Diagnostics share up 1 percentage points"
+    "Diagnostics share up 1 percentage point"
   ],
   "C-191": [
     "Order value down 3% vs prior 3 months",
@@ -982,7 +982,7 @@
   "C-197": [
     "Order value down 6% vs prior 3 months",
     "Last order was about 2 days ago",
-    "Nutrition share down 1 percentage points"
+    "Nutrition share down 1 percentage point"
   ],
   "C-198": [
     "Order value down 1% vs prior 3 months",
@@ -997,7 +997,7 @@
   "C-200": [
     "Order value down 1% vs prior 3 months",
     "Diagnostics share up 9 percentage points",
-    "Vaccines share down 1 percentage points"
+    "Vaccines share down 1 percentage point"
   ],
   "C-201": [
     "Order value down 6% vs prior 3 months",
@@ -1067,7 +1067,7 @@
   "C-214": [
     "Order value down 33% vs prior 3 months",
     "Diagnostics share up 9 percentage points",
-    "Vaccines share down 1 percentage points"
+    "Vaccines share down 1 percentage point"
   ],
   "C-215": [
     "Order value down 19% vs prior 3 months",
@@ -1102,7 +1102,7 @@
   "C-221": [
     "Order value up 2% vs prior 3 months",
     "Clinic visits down 22% vs prior 3 months",
-    "Nutrition share down 1 percentage points"
+    "Nutrition share down 1 percentage point"
   ],
   "C-222": [
     "Order value up 5% vs prior 3 months",
@@ -1306,7 +1306,7 @@
   ],
   "C-262": [
     "Order value down 6% vs prior 3 months",
-    "Vaccines share up 1 percentage points",
+    "Vaccines share up 1 percentage point",
     "Clinic visits down 17% vs prior 3 months"
   ],
   "C-263": [
@@ -1391,7 +1391,7 @@
   ],
   "C-279": [
     "Order value down 3% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Last order was about 10 days ago"
   ],
   "C-280": [
@@ -1456,7 +1456,7 @@
   ],
   "C-292": [
     "Order value down 20% vs prior 3 months",
-    "Nutrition share down 1 percentage points",
+    "Nutrition share down 1 percentage point",
     "Clinic visits down 43% vs prior 3 months"
   ],
   "C-293": [

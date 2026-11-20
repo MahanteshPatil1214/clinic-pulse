@@ -54,6 +54,11 @@ def _validate_clinic_id(clinic_id: Any) -> str | None:
     return None
 
 
+def list_reps() -> list[str]:
+    """Return the sorted sales rep ids present in the synthetic data."""
+    return sorted(str(value) for value in _clinics()["rep_id"].unique())
+
+
 def get_at_risk_clinics(rep_id: str, top_n: int = 10) -> dict[str, Any]:
     """Return the highest-risk clinics for one sales rep."""
     if not isinstance(rep_id, str) or not REP_ID_RE.fullmatch(rep_id):
