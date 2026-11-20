@@ -324,10 +324,15 @@ def _groq_answer(question: str, rep_id: str) -> dict[str, Any]:
                     "content": json.dumps(result),
                 }
             )
+    router_answer = _mock_answer(question, rep_id, mode="Fallback")["answer"]
+    if "i don't know" in router_answer.lower():
+        answer = router_answer
+    else:
+        answer = _summarize_results(tool_results, rep_id)
     return {
         "answer": (
             "Fallback mode: the model did not finish within four tool iterations. "
-            + _summarize_results(tool_results, rep_id)
+            + answer
         ),
         "tool_calls": tool_calls,
         "citations": citations,

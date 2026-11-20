@@ -40,7 +40,7 @@ py -3.11 -m venv .venv
 
 On macOS/Linux, replace `py -3.11` with `python3.11` and use `.venv/bin/python`.
 
-Expected final output from the eval: `Mock score: 14/14`, and from pytest: `6 passed`.
+Expected final output from the eval: `Mock score: 14/14`, and from pytest: `10 passed`.
 
 The repository already contains generated data, so the UI also works immediately after install. Regenerating data changes the sample only if the generator or seed changes.
 
@@ -115,6 +115,18 @@ Output is written to `data/briefings/REP-01.md`. The command is cron-friendly; p
 
 `eval/questions.json` has 14 cases, including three that must be refused. The script always runs mock mode and additionally runs Groq mode when `GROQ_API_KEY` is set.
 
+### Final handoff verification
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe eval/run_eval.py
+.\.venv\Scripts\python.exe -c "from fastapi.testclient import TestClient; from src.api import app; c=TestClient(app); print(c.get('/health').json(), c.get('/clinics/at-risk?rep_id=REP-01&top_n=3').status_code)"
+.\.venv\Scripts\python.exe -c "from src.mcp_server import mcp; print(len(mcp._tool_manager.list_tools()))"
+.\.venv\Scripts\python.exe src/briefing.py --rep-id REP-01
+```
+
+Expected: `10 passed`, `Mock score: 14/14`, `Groq score: 14/14` when a key is set, API health `status: ok` plus HTTP `200`, `4` MCP tools, and a briefing path under `data/briefings/`.
+
 ## Groq configuration
 
 Copy the example file and fill in your key:
@@ -159,8 +171,8 @@ Every tool call is logged with name, arguments, and a UTC timestamp, and returne
 
 ## 3-minute demo script
 
-1. **Start the UI:** `.\.venv\Scripts\streamlit.exe run ui/app.py`. Point at the banner and the **Active mode: Mock** label.
-2. **Ask:** `Which clinics are most at risk?` — show the ranked table and the reasons. Expand **Tools used and citations** to show `get_at_risk_clinics` and its timestamp.
+1. **Start the UI:** `.\.venv\Scripts\streamlit.exe run ui/app.py`. Point at the Aptos font, teal status banner / **Active mode: Mock** badge, three summary cards and colour-coded risk pills.
+2. **Ask:** `Which clinics are most at risk?` — show the ranked table, its risk pills and the reasons. Expand **Tools used and citations** to show `get_at_risk_clinics` and its timestamp.
 3. **Ask:** `Why is clinic C-017 flagged?` — show the SHAP reasons and risk score.
 4. **Ask:** `What can I offer clinic C-017?` — show the `targeted_promotions.md` / `Allowed Offers` citation and the explicit note that a human manager decides.
 5. **Ask:** `What is the weather forecast tomorrow?` — show the refusal.

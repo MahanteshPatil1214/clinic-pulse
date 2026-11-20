@@ -44,3 +44,12 @@ def test_loop_exhaustion_answers_from_tool_results(monkeypatch) -> None:
     assert "I don't have enough tool evidence" not in result["answer"]
     assert "C-008" in result["answer"]
     assert result["tool_calls"]
+
+
+def test_loop_exhaustion_refuses_out_of_scope(monkeypatch) -> None:
+    """Four tool-only iterations must still refuse an unsupported question."""
+    monkeypatch.setattr(agent, "API_KEY", "test-key")
+    monkeypatch.setattr(agent, "Groq", _AlwaysTools)
+    result = agent.answer("Give me the home address of the clinic owner", "REP-01")
+    assert result["mode"] == "Fallback"
+    assert "I don't know" in result["answer"]
