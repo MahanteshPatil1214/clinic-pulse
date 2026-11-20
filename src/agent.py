@@ -206,7 +206,10 @@ def _mock_answer(
             result = _call_tool("explain_risk", {"clinic_id": clinic_id})
             tool_calls.append({"name": "explain_risk", "args": {"clinic_id": clinic_id}})
             answer = _format_explain(result, clinic_id)
-    elif any(word in text for word in ["offer", "promotion", "discount", "policy", "eligible"]):
+    elif any(
+        word in text
+        for word in ["offer", "promotion", "discount", "policy", "eligible", "talking points"]
+    ):
         if "discount" in text:
             query = "discount limits by tier maximum discounts approval rules"
         elif any(word in text for word in ["offer", "promotion", "eligible"]):

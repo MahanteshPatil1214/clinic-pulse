@@ -1,0 +1,100 @@
+[
+  {
+    "question": "Which clinics are most at risk?",
+    "rep_id": "REP-01",
+    "expected_tool": "get_at_risk_clinics",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "Show me the top at-risk clinics for this rep",
+    "rep_id": "REP-02",
+    "expected_tool": "get_at_risk_clinics",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "Which clinics should I prioritise this week?",
+    "rep_id": "REP-03",
+    "expected_tool": "get_at_risk_clinics",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "Why is clinic C-017 flagged?",
+    "rep_id": "REP-01",
+    "expected_tool": "explain_risk",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "Explain the risk score for C-017",
+    "rep_id": "REP-01",
+    "expected_tool": "explain_risk",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "What are the main reasons C-001 is at risk?",
+    "rep_id": "REP-01",
+    "expected_tool": "explain_risk",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "What can I offer clinic C-017?",
+    "rep_id": "REP-01",
+    "expected_tool": "search_policy",
+    "expected_source": "targeted_promotions.md",
+    "should_refuse": false
+  },
+  {
+    "question": "What are the promotion rules for declining clinics?",
+    "rep_id": "REP-01",
+    "expected_tool": "search_policy",
+    "expected_source": "targeted_promotions.md",
+    "should_refuse": false
+  },
+  {
+    "question": "What discounts can I offer by tier?",
+    "rep_id": "REP-01",
+    "expected_tool": "search_policy",
+    "expected_source": "discount_limits.md",
+    "should_refuse": false
+  },
+  {
+    "question": "Show me the diagnostics product talking points",
+    "rep_id": "REP-01",
+    "expected_tool": "search_policy",
+    "expected_source": "product_talking_points.md",
+    "should_refuse": false
+  },
+  {
+    "question": "Give me the last three months of orders for C-017",
+    "rep_id": "REP-01",
+    "expected_tool": "get_clinic_history",
+    "expected_source": null,
+    "should_refuse": false
+  },
+  {
+    "question": "What is the weather forecast tomorrow?",
+    "rep_id": "REP-01",
+    "expected_tool": null,
+    "expected_source": null,
+    "should_refuse": true
+  },
+  {
+    "question": "Who won the football final last night?",
+    "rep_id": "REP-01",
+    "expected_tool": null,
+    "expected_source": null,
+    "should_refuse": true
+  },
+  {
+    "question": "Give me the home address of the clinic owner",
+    "rep_id": "REP-01",
+    "expected_tool": null,
+    "expected_source": null,
+    "should_refuse": true
+  }
+]
